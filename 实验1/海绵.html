@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body onload="tria;">
+	<canvas id="output" style="border:1px solid black;">
+		<script>
+			function tria(context,xa,ya,xb,yb,xc,yc,n){
+				var xp, yp, xq, yq, xr, yr;
+				var gradient=context.createLinearGradient(0,0,170,0);
+				gradient.addColorStop("0","skyblue");
+				gradient.addColorStop("1.0","pink");
+				
+			    if (n > 0){
+					xp = (xa + xb) / 2;
+			        yp = (ya + yb) / 2;
+			    xq = (xb + xc) / 2;
+			    yq = (yb + yc) / 2;
+			    xr = (xc + xa) / 2;
+			    yr = (yc + ya) / 2;
+			    context.moveTo(xp,yp);
+			    context.lineTo(xq,yq);
+			    context.lineTo(xr,yr);
+			    context.lineTo(xp,yp);
+				context.fillStyle=gradient;
+				context.fill(); 
+			    }
+			    else{			
+					return;
+			    }
+			    tria(context,xa,ya,xp,yp,xr,yr,n-1);
+			    tria(context,xb,yb,xq,yq,xp,yp,n-1);
+			    tria(context,xc,yc,xr,yr,xq,yq,n-1);
+			}
+			window.onload=init;
+			function init(){
+			    var canvas,context,N,r,x0,y0,theta;
+			    canvas=document.getElementById("output");
+			    var context=canvas.getContext("2d");
+			    canvas.width=window.innerWidth-10;
+			    canvas.height=window.innerHeight-10;
+			    var gradient=context.createLinearGradient(0,0,170,0);
+			    gradient.addColorStop("0","magenta");
+			    gradient.addColorStop("1.0","red");
+				context.strokeStyle=gradient;
+			    var xa=window.innerWidth/6;
+			    var ya=10;
+			    var xb=10;
+			    var yb=window.innerHeight-40;
+			    var xc=window.innerWidth-40;
+			    var yc=window.innerHeight-40;
+			    context.moveTo(xa,ya);
+			    context.lineTo(xb,yb);
+			    context.lineTo(xc,yc);
+			    context.lineTo(xa,ya);
+			    tria(context,xa,ya,xb,yb,xc,yc,6);
+			    
+				context.stroke();
+				
+			    }
+		</script>
+	
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body onload="init();">
+	<canvas id="output" style="border:1px solid black;">
+		<script>
+			var ctx;
+			function init(){
+				var canvas,context,N,r,x0,y0,theta;
+				canvas=document.getElementById("output");
+				context=canvas.getContext("2d");
+				canvas.width=window.innerWidth;
+				canvas.height=window.innerHeight;
+				N=23;
+				r=0.3*window.innerHeight;
+				x0=window.innerWidth/2;
+				y0=window.innerHeight/2;
+				theta=2*Math.PI/N;
+				var arr=new Array(N);
+				for(var i=0;i<N;i++){
+					var x,y;
+					x=x0+r*Math.cos(i*theta);
+					y=y0+r*Math.sin(i*theta);
+					arr[i]={"x":x,"y":y};
+				}
+				context.strokeStyle="#ff0000";
+				for(var i=0;i<N;i++){
+					for(var j=0;j<N;j++){
+						context.moveTo(arr[i].x,arr[i].y);
+						context.lineTo(arr[j].x,arr[j].y);
+					}
+				}
+				context.stroke();
+			}
+			init();
+		</script>
+ </canvas>
+	
+</body>
+</html>

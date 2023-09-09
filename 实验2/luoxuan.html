@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<body>
+		<canvas id="output" style="border:1px solid black;">
+			<script>
+				function polygon(context,x0, y0, r,n,alpha){
+				if (n < 3) return;
+				x = x0 + r * Math.cos(alpha);
+				y = y0 + r * Math.sin(alpha);
+				xe = x,ye = y;
+				context.moveTo(x,y);
+				for (var i = 1; i < n; i++){
+				theta = 2*i*Math.PI/n+alpha;
+				x = x0 + r * Math.cos(theta);
+				y = y0 + r * Math.sin(theta);
+				context.lineTo(x,y);
+				}
+				context.lineTo(xe,ye);
+				context.stroke();
+				}
+				window.onload=init;
+				function init(){
+				var canvas,context,N,r,x0,y0,theta;
+				canvas=document.getElementById("output");
+				var context=canvas.getContext("2d");
+				width=window.innerWidth-40;
+				height=window.innerHeight-40;
+				canvas.width=width;
+				canvas.height=height;
+				context.strokeStyle="#ff0000";
+				var x=width/2;
+				var y=height/2;
+				var r=x;
+				if(x>y)r=y;
+				m=3;
+				alpha=0.1;
+				theta = Math.PI / m;
+				a=r;
+				f = 1 / (Math.cos(alpha) + Math.tan(theta) 
+				*Math.sin(alpha));
+				for(i=1;i<15;i++){
+				//alert("i="+i);
+				polygon(context,x, y, a,m,theta+i*alpha);
+				a = a * f;
+				}
+				}
+		    </script>
+	    </canvas>
+</body>
+</html>

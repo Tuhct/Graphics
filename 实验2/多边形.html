@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<body onload="polygon();">
+		<canvas id="output" style="border:1px solid black;">
+			<script>
+				function polygon(){
+				//context.save();                                    //存储画布状态，前面提到过
+				//context.beginPath();
+				//ctx.clearRect(0, 0, width, height);
+				var canvas,context,N,r,x0,y0,theta;
+				canvas=document.getElementById("output");
+				var context=canvas.getContext("2d");
+				width=window.innerWidth-40;
+				height=window.innerHeight-40;
+				canvas.width=width;
+				canvas.height=height;
+				context.strokeStyle="#ff0000";
+				var x=width/2;
+				var y=height/2;
+				n=6;
+				var r=3*x/n;
+				//var now = new Date(); 
+				//var second = now.getSeconds();
+				//ctx.rotate(second*Math.PI/180);
+				if (n < 3) return;
+				context.moveTo(x,y);
+				for (var i = 1; i < n; i++){
+				theta = 2*i*Math.PI/n;
+				x = x + r * Math.cos(theta);
+				y = y + r * Math.sin(theta);
+				context.lineTo(x,y);
+				}
+				context.closePath();
+				context.stroke();
+				//context.restore();
+				}
+				//setInterval(polygon, 10); 
+			
+		    </script>
+	    </canvas>
+</body>
+</html>
